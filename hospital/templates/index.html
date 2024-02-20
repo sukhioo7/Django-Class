@@ -17,33 +17,34 @@
                 <h2 class="text-center">Patient Registration</h2>
             </div>
             <div class="m-5 p-2">
-                <form class="row g-3">
+                <form method="post" action="{% url 'patient:patient_home' %}" class="row g-3">
+                    {% csrf_token %}
                     <div class="col-md-6">
                       <label for="inputEmail4" class="form-label">Full Name</label>
-                      <input type="text" class="form-control" id="inputEmail4">
+                      <input type="text" name="full_name" class="form-control" id="inputEmail4">
                     </div>
                     <div class="col-md-6">
                       <label for="inputPassword4" class="form-label">Age</label>
-                      <input type="number" class="form-control" id="inputPassword4">
+                      <input type="number" name="age" class="form-control" id="inputPassword4">
                     </div>
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="inputAddress" >
+                      <input type="email" name="email" class="form-control" id="inputAddress" >
                     </div>
                     <div class="col-12">
                       <label for="inputAddress2" class="form-label">Phone</label>
-                      <input type="number" class="form-control" id="inputAddress2" >
+                      <input type="number" name="phone" class="form-control" id="inputAddress2" >
                     </div>
                     <div class="col-md-6">
                       <label for="inputCity" class="form-label">City</label>
-                      <input type="text" class="form-control" id="inputCity">
+                      <input type="text" name="city" class="form-control" id="inputCity">
                     </div>
                     <div class="col-md-2">
                         <label for="inputCity" class="form-label">Gender</label>
                         <div>
-                            <input type="radio" class="btn-check" name="options-base" id="male" autocomplete="off">
+                            <input type="radio" class="btn-check" name="gender" id="male" autocomplete="off">
                             <label class="btn btn-outline-success w-30 me-2" for="male">Male</label>
-                            <input type="radio" class="btn-check" name="options-base" id="female" autocomplete="off">
+                            <input type="radio" class="btn-check" name="gender" id="female" autocomplete="off">
                             <label class="btn btn-outline-danger w-10" for="female">Female</label>
                         </div>
                     </div>
@@ -54,7 +55,7 @@
                     <div class="col-12">
                       
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <textarea name="symptoms" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                             <label for="floatingTextarea2">Symptoms</label>
                         </div>
                     

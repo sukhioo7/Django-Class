@@ -3,12 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 
 def home(request):
-    name = "Sukhdeep"
-
+    name = 'Sukhdeep'
+    age = 34
     data = {
-        'name':name,
-        'age':4,
-        'subject':['Python','SQL','Django','HTML','CSS','Javascript']
+        'username':name,
+        'age':age
     }
     return render(request,'patient/home.html',context=data)
 

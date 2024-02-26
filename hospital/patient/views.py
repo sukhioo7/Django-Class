@@ -23,15 +23,15 @@ def home(request):
         patient.patient_symptoms = symptoms
         patient.save()
 
+        return render(request,'patient/success.html')
+    else:
+        # select * from patients;
+        patients = models.Patients.objects.all()
         data = {
-            'msg':"Patient Registration Successfull"
+            'patients':patients
         }
         return render(request,'patient/home.html',context=data)
-    else:
-        return render(request,'patient/home.html')
 
 
 def contact(request):
     return render(request,'patient/contact.html')
-
-# python manage.py runserver

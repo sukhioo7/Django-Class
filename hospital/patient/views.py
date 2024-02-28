@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse,redirect
 from . import models
 
 # Create your views here.
@@ -35,3 +35,9 @@ def home(request):
 
 def contact(request):
     return render(request,'patient/contact.html')
+
+def delete(request,id):
+    # select * from patients where patient_id=id;
+    patient = models.Patients.objects.filter(patient_id=id).get()
+    patient.delete()
+    return redirect('patient:patient_home')

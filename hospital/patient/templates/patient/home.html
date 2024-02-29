@@ -20,8 +20,8 @@
     <div class="patient-card">
       <div class="patient-img">
         <div>
-          <img src="{% static 'patient/img/patient_img.jpg' %}" alt="">
-        </div>
+          <img src="{{ patient.patient_image.url }}" alt="">
+        </div> 
         <span>Patient ID : {{patient.patient_id}}</span>
       </div>
       <div class="patient-details">

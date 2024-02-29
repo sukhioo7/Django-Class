@@ -9,6 +9,7 @@ class Patients(models.Model):
     patient_city = models.CharField(max_length=300)
     patient_email = models.EmailField(max_length=300)
     patient_phone = models.CharField(max_length=10)
+    patient_image = models.ImageField(null=True,upload_to='patients/')
     patient_symptoms = models.CharField(max_length=3000)
 
 

@@ -11,6 +11,7 @@ def home(request):
         phone = request.POST['phone'] 
         city = request.POST['city'] 
         gender = request.POST['gender'] 
+        photo = request.FILES['photo']
         symptoms = request.POST['symptoms'] 
 
         patient = models.Patients()
@@ -20,6 +21,7 @@ def home(request):
         patient.patient_email = email
         patient.patient_phone = phone
         patient.patient_gender = gender
+        patient.patient_image = photo
         patient.patient_symptoms = symptoms
         patient.save()
 

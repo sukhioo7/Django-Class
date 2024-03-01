@@ -20,6 +20,12 @@
             <div class="m-5 p-2">
                 <form method="post" enctype="multipart/form-data" action="{% url 'patient:patient_home' %}" class="row g-3">
                     {% csrf_token %}
+                    {% if empty_values %}
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Empty Values!</strong> Please fill all the fields.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endif %}
                     <div class="col-md-6">
                       <label for="inputEmail4" class="form-label">Full Name</label>
                       <input type="text" name="full_name" class="form-control" id="inputEmail4">
@@ -29,6 +35,12 @@
                       <input type="number" name="age" class="form-control" id="inputPassword4">
                     </div>
                     <div class="col-12">
+                      {% if email_exist %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <strong>Email Exist!</strong> This Email is already taken.
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                      {% endif %}
                       <label for="inputAddress" class="form-label">Email</label>
                       <input type="email" name="email" class="form-control" id="inputAddress" >
                     </div>

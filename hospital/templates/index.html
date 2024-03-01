@@ -45,6 +45,12 @@
                       <input type="email" name="email" class="form-control" id="inputAddress" >
                     </div>
                     <div class="col-12">
+                      {% if phone_exist %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <strong>Phone Exist!</strong> This Phone No. is already taken.
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                      {% endif %}
                       <label for="inputAddress2" class="form-label">Phone</label>
                       <input type="number" name="phone" class="form-control" id="inputAddress2" >
                     </div>

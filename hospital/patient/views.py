@@ -19,16 +19,16 @@ def home(request):
             check_phone = models.Patients.objects.filter(patient_phone=phone).exists()
             if not(check_email):
                 if not(check_phone):
-                    # patient = models.Patients()
-                    # patient.patient_name = full_name
-                    # patient.patient_age = age
-                    # patient.patient_city = city
-                    # patient.patient_email = email
-                    # patient.patient_phone = phone
-                    # patient.patient_gender = gender
-                    # patient.patient_image = photo
-                    # patient.patient_symptoms = symptoms
-                    # patient.save()
+                    patient = models.Patients()
+                    patient.patient_name = full_name
+                    patient.patient_age = age
+                    patient.patient_city = city
+                    patient.patient_email = email
+                    patient.patient_phone = phone
+                    patient.patient_gender = gender
+                    patient.patient_image = photo
+                    patient.patient_symptoms = symptoms
+                    patient.save()
 
                     return render(request,'patient/success.html')
                 else:

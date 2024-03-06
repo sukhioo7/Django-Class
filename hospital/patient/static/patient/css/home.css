@@ -37,6 +37,12 @@ body{
     font-size: 1.8em;
     font-family: "Dancing Script", cursive;
 }
+.no-data{
+    margin-top: 15%;
+    font-size: 8em;
+    color: #b15115b6;
+    font-family: "Dancing Script", cursive;
+}
 .patient-details b,.patient-details h4{
     color: #b15115b6;
 }

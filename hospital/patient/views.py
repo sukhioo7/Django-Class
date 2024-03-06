@@ -1,11 +1,18 @@
 from django.shortcuts import render,HttpResponse,redirect
 from . import models
 import os
+from django.db.models import Q
 
 # Create your views here.
 
 def home(request):
-    if request.POST:
+    if 'search' in request.POST:
+        query = request.POST['query']
+        patients = models.Patients.objects.filter(Q(patient_name__icontains=query) | Q(patient_age__icontains=query) | 
+                                        Q(patient_city__icontains=query) | Q(patient_phone__icontains=query)
+                                          | Q(patient_email__icontains=query)
+                                        | Q(patient_symptoms__icontains=query))
+    elif 'registration' in request.POST:
         full_name = request.POST['full_name'] 
         age = request.POST['age'] 
         email = request.POST['email'] 
@@ -47,10 +54,10 @@ def home(request):
     else:
         # select * from patients;
         patients = models.Patients.objects.all()
-        data = {
-            'patients':patients
-        }
-        return render(request,'patient/home.html',context=data)
+    data = {
+        'patients':patients
+    }
+    return render(request,'patient/home.html',context=data)
 
 
 def contact(request):

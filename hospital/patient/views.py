@@ -70,3 +70,33 @@ def delete(request,id):
     os.remove(file_path)
     patient.delete()
     return redirect('patient:patient_home')
+
+def update(request,id):
+    patient = models.Patients.objects.filter(patient_id=id).get()
+    if request.POST:
+        full_name = request.POST['full_name'] 
+        age = request.POST['age'] 
+        email = request.POST['email'] 
+        phone = request.POST['phone'] 
+        city = request.POST['city'] 
+        gender = request.POST.get('gender') 
+        symptoms = request.POST['symptoms'] 
+        if all([full_name,age,email,phone,city,gender,symptoms]):
+            patient.patient_name = full_name
+            patient.patient_age = age
+            patient.patient_city = city
+            patient.patient_email = email
+            patient.patient_phone = phone
+            patient.patient_gender = gender
+            patient.patient_symptoms = symptoms
+            patient.save()
+            return redirect('patient:patient_home')
+        else:
+            error = {
+                'empty_values':True
+            }
+        return HttpResponse('Error')
+    data = {
+        'patient':patient
+    }
+    return render(request,'patient/update.html',context=data)

@@ -29,7 +29,7 @@
           <h2>
             <span id="patient-name">{{patient.patient_name}}</span> 
             <span>
-              <a style="background-color: #0C5B37;" href=""><ion-icon name="create"></ion-icon></a>
+              <a style="background-color: #0C5B37;" href="{% url 'patient:update_patient' id=patient.patient_id  %}"><ion-icon name="create"></ion-icon></a>
               <a style="background-color: #C60C30;" href="{% url 'patient:delete_patient' id=patient.patient_id %}"><ion-icon name="trash"></ion-icon></a>
             </span>
           </h2>

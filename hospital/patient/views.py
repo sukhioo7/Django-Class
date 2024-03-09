@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from . import models
 import os
 from django.db.models import Q
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
@@ -93,10 +93,58 @@ def update(request,id):
             return redirect('patient:patient_home')
         else:
             error = {
-                'empty_values':True
+                'empty_values':True,
+                'patient':patient
             }
-        return HttpResponse('Error')
+        return render(request,'patient/update.html',context=error)
     data = {
         'patient':patient
     }
     return render(request,'patient/update.html',context=data)
+
+def login(request):
+    return render(request,'patient/login.html')
+
+def signup(request):
+    if request.POST:
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+
+        if all([first_name,last_name,username,email,password,confirm_password]):
+            check_username = User.objects.filter(username=username).exists()
+            check_email = User.objects.filter(email=email).exists()
+            if not(check_username):
+                if not(check_email):
+                    if password==confirm_password:
+                        user = User.objects.create(username=username,
+                                                password=password,
+                                                email=email,
+                                                first_name=first_name,
+                                                last_name=last_name)
+                        user.is_active = True
+                        user.save()
+                        msg = {
+                            'account_created':True
+                        }
+                    else:
+                        msg = {
+                            'password_error':True
+                        }   
+                else:
+                    msg = {
+                        'email_exist':True
+                    }
+            else:
+                msg = {
+                    'username_exist':True
+                }
+        else:
+            msg = {
+                'empty_values':True
+            }
+        return render(request,'patient/signup.html',context=msg)
+    return render(request,'patient/signup.html')

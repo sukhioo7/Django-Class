@@ -143,11 +143,11 @@ def signup(request):
                 if not(check_email):
                     if password==confirm_password:
                         user = User.objects.create(username=username,
-                                                password=password,
                                                 email=email,
                                                 first_name=first_name,
                                                 last_name=last_name)
                         user.is_active = True
+                        user.set_password(password)
                         user.save()
                         msg = {
                             'account_created':True

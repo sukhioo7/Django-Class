@@ -25,6 +25,7 @@
           <button name="search" class="btn btn-outline-success" type="submit">Search</button>
         </form>
         {% if request.session.user_id %}
+          <span class="ms-2"><b>Dr. {{request.session.user_name | title }}</b></span>
           <a href="{% url 'patient:logout' %}" class="btn btn-outline-danger ms-2">Logout</a>
         {% else %}
           <a href="{% url 'patient:signup' %}" class="btn btn-outline-primary ms-2">Signup</a>

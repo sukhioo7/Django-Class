@@ -3,6 +3,7 @@ from . import models
 import os
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
 def home(request):
@@ -102,8 +103,29 @@ def update(request,id):
     }
     return render(request,'patient/update.html',context=data)
 
-def login(request):
+def user_login(request):
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            user = User.objects.filter(id=user.pk).get()
+            request.session['user_id'] = user.pk
+            request.session['user_name'] = user.first_name
+            return redirect('hospital_home')
+        else:
+            msg = {
+                    'detail_error':True
+            }
+        return render(request,'patient/login.html',context=msg)
     return render(request,'patient/login.html')
+
+def user_logout(request):
+    logout(request)
+    request.session.clear()
+    return redirect('hospital_home')
 
 def signup(request):
     if request.POST:

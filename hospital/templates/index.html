@@ -18,7 +18,7 @@
                 <h2 class="text-center">Patient Registration</h2>
             </div>
             <div class="m-5 p-2">
-                <form method="post" enctype="multipart/form-data" action="{% url 'patient:patient_home' %}" class="row g-3">
+                <form method="post" enctype="multipart/form-data" action="{% url 'patient:patient_home' page=1 %}" class="row g-3">
                     {% csrf_token %}
                     {% if empty_values %}
                       <div class="alert alert-danger alert-dismissible fade show" role="alert">

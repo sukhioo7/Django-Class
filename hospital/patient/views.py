@@ -4,9 +4,12 @@ import os
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+from django.core.paginator import Paginator
 # Create your views here.
 
-def home(request):
+def home(request,page):
+    if 'user_id' not in request.session:
+        return redirect('patient:login')
     if 'search' in request.POST:
         query = request.POST['query']
         patients = models.Patients.objects.filter(Q(patient_name__icontains=query) | Q(patient_age__icontains=query) | 
@@ -55,6 +58,19 @@ def home(request):
     else:
         # select * from patients;
         patients = models.Patients.objects.all()
+        paginator = Paginator(patients,2)
+        patients = paginator.page(number=page)
+    data = {
+        'patients':patients
+    }
+    return render(request,'patient/home.html',context=data)
+
+
+def filter(request,gender):
+    if gender=='male':
+        patients = models.Patients.objects.filter(patient_gender='Male').all()
+    elif gender=='female':
+        patients = models.Patients.objects.filter(patient_gender='Female').all()
     data = {
         'patients':patients
     }
@@ -65,6 +81,8 @@ def contact(request):
     return render(request,'patient/contact.html')
 
 def delete(request,id):
+    if 'user_id' not in request.session:
+        return redirect('patient:login')
     # select * from patients where patient_id=id;
     patient = models.Patients.objects.filter(patient_id=id).get()
     file_path = patient.patient_image.path
@@ -73,6 +91,8 @@ def delete(request,id):
     return redirect('patient:patient_home')
 
 def update(request,id):
+    if 'user_id' not in request.session:
+        return redirect('patient:login')
     patient = models.Patients.objects.filter(patient_id=id).get()
     if request.POST:
         full_name = request.POST['full_name'] 

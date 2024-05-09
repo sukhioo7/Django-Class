@@ -1,5 +1,5 @@
 """
-URL configuration for hospital project.
+URL configuration for Hospital project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -15,18 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 from . import views
-from . import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
-    path('',views.home,name='hospital_home'),
-    path('about/',views.about,name='about'),
-    path('patient/',include('patient.urls')),
+    path('',views.home),
     path("admin/", admin.site.urls),
 ]
-# www.hospial.com/
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

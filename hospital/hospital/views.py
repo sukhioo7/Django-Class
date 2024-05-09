@@ -1,8 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 
-# Create your views here.
 def home(request):
-    return render(request,'index.html')
-# Create your views here.
-def about(request):
-    return render(request,'about.html')
+    name = 'Sukhdeep Singh'
+    age = 24
+    city = 'Nawanshahr'
+
+    data = {
+        'name':name,
+        'my_age':age,
+        'city':city,
+        'fev_color':'Red'
+    }
+    return render(request,'home.html',context=data)

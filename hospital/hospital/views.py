@@ -1,14 +1,14 @@
 from django.shortcuts import render,HttpResponse
 
 def home(request):
-    name = 'Sukhdeep Singh'
-    age = 24
-    city = 'Nawanshahr'
+    name = 'Sukhdeep'
 
     data = {
-        'name':name,
-        'my_age':age,
-        'city':city,
-        'fev_color':'Red'
+        'my_name':name,
+        'age':24,
+        'subject':'Django'
     }
     return render(request,'home.html',context=data)
+
+def contact(request):
+    return render(request,'contact.html')

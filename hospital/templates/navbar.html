@@ -11,16 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav-underline navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.php">Home</a>
+                  <a class="nav-link" href="{% url 'Home_page' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="patients.php">Patient</a>
+                  <a class="nav-link" href="{% url 'Patient:patient_page' %}">Patient</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Contact Us</a>
+                  <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
                 </li>
           </ul>
           <form method="POST" action="patients.php" class="d-flex" role="search">

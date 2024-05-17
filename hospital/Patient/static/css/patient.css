@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+main{
+    /* background-color: aqua; */
+    margin: 2% 5%;
+}
+.patient-card{
+    display: flex;
+    background-color: #e6ebf6;
+    border-radius: 1em;
+    transition: transform 0.2s;
+}
+.patient-card p , .left-side span{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.3em;
+    
+}
+.left-side{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    border-right: 2px dashed #858585;
+}
+.right-side{
+    padding: 3% 7% 2% 3%;
+}
+.right-side h2{
+    font-family: "Courgette", cursive;
+    font-size: 5em;
+}
+.left-side img{
+    border-radius: 0.7em;
+    width: 15em;
+}
+main h1{
+    text-align: center;
+    color: #135D66;
+    font-size: 4em;
+    margin-bottom: 2%;
+}
+.patient-card:hover{
+    outline: 2px solid #135D66;
+    transform: scale(1.01);
+}

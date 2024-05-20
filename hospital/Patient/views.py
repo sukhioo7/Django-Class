@@ -22,5 +22,10 @@ def patient(request):
             patient.patient_gender = gender
             patient.patient_symptoms = symptoms
             patient.save()
+    # 'select * from patients;'
+    patients = models.Patient.objects.all()
 
-    return render(request,'Patient/patient.html') 
+    data = {
+        'patients':patients
+    }
+    return render(request,'Patient/patient.html',context=data) 

@@ -25,7 +25,7 @@
                 <div class="left-side">
                     <span class="mb-2"><b>Patient ID : </b>{{patient.patient_id}}</span>
                     <div>
-                        <img src="{% static 'img/banda.jpg' %}" alt="">
+                        <img src="{{patient.patient_image.url}}" alt="">
                     </div>
                     <span><b>Registerted At</b></span>
                     <span>{{patient.registered_time}}</span>
@@ -36,7 +36,7 @@
                         <h2>{{patient.patient_name}}</h2>
                         <div class="alter-btn">
                             <a class="edit" href=""><i class="bi bi-pencil-square"></i></a>
-                            <a class="delete" href=""><i class="bi bi-archive-fill"></i></a>
+                            <a class="delete" href="{% url 'Patient:delete-card' id=patient.patient_id %}"><i class="bi bi-archive-fill"></i></a>
                         </div>
                     </div>
                     <div class="details">

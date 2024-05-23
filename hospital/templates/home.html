@@ -30,7 +30,25 @@
             <img src="{% static 'img/registration-img.svg' %}" alt="">
         </div>
         <div class="registration-form">
-        <form action="{% url 'Patient:patient_page' %}" method="POST" class="row g-3">
+        <form action="{% url 'Patient:patient_page' %}" enctype="multipart/form-data" method="POST" class="row g-3">
+          {% if error == 'else' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>ERROR!</strong> Somthing Bad Happend :(.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+          {% if error == 'empty-fields' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Empty Fields!</strong> Please fill all the fields.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+          {% if success == 'done' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Registration Done :)</strong> Your data is uploaded successfuly.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
             {% csrf_token %}
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Full Name</label>
@@ -40,10 +58,22 @@
               <label for="inputPassword4" class="form-label">Age</label>
               <input name="age" type="number" class="form-control" id="inputPassword4" placeholder="Ex : 34">
             </div>
+            {% if error == 'email-error' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Email Exists!</strong> This email is already in use.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endif %}
             <div class="col-12">
               <label for="inputAddress" class="form-label">Email</label>
               <input name="email" type="email" class="form-control" id="inputAddress" placeholder="Ex : john@gmail.com">
             </div>
+            {% if error == 'phone-error' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Phone Exists!</strong> This phone no. is already in use.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endif %}
             <div class="col-12">
               <label for="inputAddress2" class="form-label">Phone</label>
               <input name="phone" type="number" class="form-control" id="inputAddress2" placeholder="Ex : xxxxxxxx87">
@@ -61,10 +91,16 @@
                 <label class="btn" for="option6">Female</label>
               </div>
             </div>
+            {% if error == 'empty-image' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Empty Image</strong> Please upload a image of yours.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endif %}
             <div class="col-12">
               <div class="mb-3">
                 <label for="formFile" class="form-label">Patient Image</label>
-                <input class="form-control" type="file" id="formFile">
+                <input name="image" class="form-control" type="file" id="formFile">
               </div>
             </div>
             <div class="col-12">

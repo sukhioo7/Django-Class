@@ -35,7 +35,7 @@
                     <div class="d-flex justify-content-between"> 
                         <h2>{{patient.patient_name}}</h2>
                         <div class="alter-btn">
-                            <a class="edit" href=""><i class="bi bi-pencil-square"></i></a>
+                            <a class="edit" href="{% url 'Patient:update-patient' id=patient.patient_id %}"><i class="bi bi-pencil-square"></i></a>
                             <a class="delete" href="{% url 'Patient:delete-card' id=patient.patient_id %}"><i class="bi bi-archive-fill"></i></a>
                         </div>
                     </div>

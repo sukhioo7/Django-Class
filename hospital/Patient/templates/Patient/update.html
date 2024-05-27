@@ -26,6 +26,24 @@
                     <input class="form-control" value="{{patient.patient_image.url}}" name="image" type="file" id="formFile">
                 </div>
                 <div class="row m-3 p-3">
+                    {% if error == 'else' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>ERROR!</strong> Somthing Bad Happend :(.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                    {% if error == 'empty-fields' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Empty Fields!</strong> Please fill all the fields.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                    {% if success == 'done' %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Update Done :)</strong> Record updated successfuly.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
                     <div class="row">
                         <div class="col">
                             <label for="inputEmail4" class="form-label">Full Name</label>
@@ -37,12 +55,24 @@
                         </div>
                     </div>
                     <div class="row">
+                        {% if error == 'email-error' %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Email Exists!</strong> This email is already in use.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
                         <div>
                             <label for="inputAddress" class="form-label">Email</label>
                             <input type="email" name="email" value="{{patient.patient_email}}" class="form-control" id="inputAddress" placeholder="Email">
                         </div>
                     </div>
                     <div class="row">
+                        {% if error == 'phone-error' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Phone Exists!</strong> This phone no. is already in use.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endif %}
                         <div>
                             <label for="inputAddress2" class="form-label">Phone No.</label>
                             <input type="number" name="phone" value="{{patient.patient_phone}}" class="form-control" id="inputAddress2" placeholder="Phone No.">

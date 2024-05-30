@@ -2,6 +2,8 @@ from django.shortcuts import render,HttpResponse,redirect
 from . import models
 from django.db import IntegrityError
 from django.db.models import Q 
+from django.contrib import messages
+import pandas as pd
 
 
 # Create your views here.
@@ -70,6 +72,43 @@ def patient(request):
         'patients':patients
     }
     return render(request,'Patient/patient.html',context=data) 
+
+def filter_patient(request,by):
+    if by=='male':
+        patients = models.Patient.objects.filter(patient_gender="Male").all()
+        data = {
+            'patients':patients
+        }
+    elif by=='female':
+        patients = models.Patient.objects.filter(patient_gender="Female").all()
+        data = {
+            'patients':patients
+        }
+    elif by=='age-asc':
+        patients = models.Patient.objects.order_by('patient_age')
+        data = {
+            'patients':patients
+        }
+    elif by=='age-desc':
+        patients = models.Patient.objects.order_by('-patient_age')
+        data = {
+            'patients':patients
+        }
+    return render(request,'Patient/patient.html',context=data)
+    
+
+def convert2excel(request):
+    patients = models.Patient.objects.all().values(
+                        'patient_id','patient_name','patient_age','patient_phone',
+                        'patient_email','patient_gender','patient_city','patient_symptoms',
+                        'registered_time')
+    
+    columns = ['ID','Name','Age','Phone','Email','Gender','City','Symptoms','Registered Date']
+
+    raw = pd.DataFrame(patients)
+    raw.columns = columns
+    raw.to_excel('patient.xlsx')
+    return redirect('Patient:patient_page')
 
 
 def delete_patient(request,id):

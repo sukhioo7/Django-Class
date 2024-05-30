@@ -17,7 +17,20 @@
 
     <main>
         <div>
+            <div class="dropdown">
+                <a style="background-color: #135D66; color: aliceblue;" class="btn btn-lg dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filter
+                </a>
+              
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'Patient:filter-patient' by='male' %}">Male</a></li>
+                  <li><a class="dropdown-item" href="{% url 'Patient:filter-patient' by='female' %}">Female</a></li>
+                  <li><a class="dropdown-item" href="{% url 'Patient:filter-patient' by='age-asc' %}">Age ASC</a></li>
+                  <li><a class="dropdown-item" href="{% url 'Patient:filter-patient' by='age-desc' %}">Age DESC</a></li>
+                </ul>
+              </div>
             <h1>Patient</h1>
+            <a style="background-color: #135D66; color: aliceblue;" class="btn" href="{% url 'Patient:to-excel' %}">Export to xlsx</a>
         </div>
         <div>
             {% for patient in patients %}

@@ -2,9 +2,9 @@ from django.shortcuts import render,HttpResponse,redirect
 from . import models
 from django.db import IntegrityError
 from django.db.models import Q 
-from django.contrib import messages
 import pandas as pd
-
+from django.conf import settings
+import os
 
 # Create your views here.
 def patient(request):
@@ -107,9 +107,23 @@ def convert2excel(request):
 
     raw = pd.DataFrame(patients)
     raw.columns = columns
-    raw.to_excel('patient.xlsx')
+    
+    file_path = os.path.join(settings.MEDIA_ROOT,'files\patients.xlsx')
+
+    raw.to_excel(file_path,index=False)
+
     return redirect('Patient:patient_page')
 
+def download_excel(request):
+    file_path = os.path.join(settings.MEDIA_ROOT, 'files\patients.xlsx')
+    
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as file:
+            response = HttpResponse(file.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = 'attachment; filename="patients_data.xlsx"'
+            return response
+    else:
+        return HttpResponse('File not found')
 
 def delete_patient(request,id):
     patient = models.Patient.objects.get(patient_id=id)

@@ -8,5 +8,6 @@ urlpatterns = [
     path('delete/<int:id>/',views.delete_patient,name='delete-card'),
     path('update/<int:id>/',views.update,name='update-patient'),
     path('filter/<slug:by>/',views.filter_patient,name='filter-patient'),
-    path('export-to-xlsx',views.convert2excel,name='to-excel')
+    path('export-to-xlsx/',views.convert2excel,name='to-excel'),
+    path('download-file/',views.download_excel,name='download-excel'),
 ]

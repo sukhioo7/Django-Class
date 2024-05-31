@@ -30,7 +30,7 @@
             <img src="{% static 'img/registration-img.svg' %}" alt="">
         </div>
         <div class="registration-form">
-        <form action="{% url 'Patient:patient_page' %}" enctype="multipart/form-data" method="POST" class="row g-3">
+        <form action="{% url 'Patient:patient_page' page=1 %}" enctype="multipart/form-data" method="POST" class="row g-3">
           {% if error == 'else' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
               <strong>ERROR!</strong> Somthing Bad Happend :(.

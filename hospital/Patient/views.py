@@ -5,9 +5,10 @@ from django.db.models import Q
 import pandas as pd
 from django.conf import settings
 import os
+from django.core.paginator import Paginator
 
 # Create your views here.
-def patient(request):
+def patient(request,page):
     if request.GET:
         query = request.GET['search']
         patients = models.Patient.objects.filter(Q(patient_name__icontains=query) 
@@ -67,7 +68,8 @@ def patient(request):
         return render(request,'home.html',context=error)
     # 'select * from patients;'
     patients = models.Patient.objects.all()
-
+    paginator = Paginator(patients,6)
+    # paginator.page(number=)
     data = {
         'patients':patients
     }
@@ -112,7 +114,7 @@ def convert2excel(request):
 
     raw.to_excel(file_path,index=False)
 
-    return redirect('Patient:patient_page')
+    return redirect('Patient:download-excel')
 
 def download_excel(request):
     file_path = os.path.join(settings.MEDIA_ROOT, 'files\patients.xlsx')
@@ -120,7 +122,7 @@ def download_excel(request):
     if os.path.exists(file_path):
         with open(file_path, 'rb') as file:
             response = HttpResponse(file.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            response['Content-Disposition'] = 'attachment; filename="patients_data.xlsx"'
+            response['Content-Disposition'] = 'attachment; filename="patients.xlsx"'
             return response
     else:
         return HttpResponse('File not found')
@@ -129,7 +131,7 @@ def delete_patient(request,id):
     patient = models.Patient.objects.get(patient_id=id)
     patient.patient_image.delete()
     patient.delete()
-    return redirect('Patient:patient_page')
+    return redirect('Patient:patient_page',page=1)
 
 
 def update(request,id):

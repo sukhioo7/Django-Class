@@ -17,3 +17,13 @@ class Patient(models.Model):
 
     def __str__(self):
         return f'Patient ID : {self.patient_id}, Name : {self.patient_name}'
+    
+class Staff(models.Model):
+    staff_id = models.AutoField(primary_key=True,unique=True)
+    staff_name = models.CharField(max_length=300)
+    staff_email = models.EmailField(max_length=300,unique=True)
+    staff_designation = models.CharField(max_length=300)
+    staff_password = models.CharField(max_length=1000,editable = False)
+
+    def __str__(self):
+        return f'Staff ID : {self.staff_id}, Designation : {self.staff_designation}'

@@ -70,10 +70,22 @@
                 </div>
             </div>
             {% endfor %}
+    
             <div aria-label=" Pagenavigation  example">
                 <ul class="pagination  pagination-lg">
-                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                {% if patients.has_previous  %}
+                  <li class="page-item"><a class="page-link" href="{% url 'Patient:patient_page' page=patients.previous_page_number %}">Previous</a></li>
+                {% endif %}
+                {% for page_number in patients.paginator.page_range %}
+                    {% if page_number == patients.number %}
+                        <li class="page-item"><a class="page-link bg-primary text-white" href="{% url 'Patient:patient_page' page=page_number %}">{{page_number}}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="{% url 'Patient:patient_page' page=page_number %}">{{page_number}}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if patients.has_next %}
+                  <li class="page-item"><a class="page-link" href="{% url 'Patient:patient_page' page=patients.next_page_number %}">Next</a></li>
+                {% endif %}
                 </ul>
             </div>
         </div>

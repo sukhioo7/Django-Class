@@ -6,6 +6,7 @@ import pandas as pd
 from django.conf import settings
 import os
 from django.core.paginator import Paginator
+from django.contrib.auth.hashers import make_password,check_password
 
 # Create your views here.
 def patient(request,page):
@@ -68,10 +69,10 @@ def patient(request,page):
         return render(request,'home.html',context=error)
     # 'select * from patients;'
     patients = models.Patient.objects.all()
-    paginator = Paginator(patients,6)
-    # paginator.page(number=)
+    paginator = Paginator(patients,5)
+    pagination_patients = paginator.page(number=page)
     data = {
-        'patients':patients
+        'patients':pagination_patients
     }
     return render(request,'Patient/patient.html',context=data) 
 
@@ -183,3 +184,45 @@ def update(request,id):
     patient = models.Patient.objects.get(patient_id=id)
     data = {'patient':patient}
     return render(request,'Patient/update.html',context=data)
+
+
+def staff_signup(request):
+    if request.POST:
+        full_name = request.POST.get('full_name')
+        designation = request.POST.get('designation')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if all([full_name,designation,email,password,confirm_password]):
+            if password==confirm_password:
+                encriypt_password = make_password(password)
+                try:
+                    models.Staff.objects.create(staff_name=full_name,
+                                                staff_designation=designation,
+                                                staff_email=email,
+                                                staff_password=encriypt_password)
+                    return render(request,'Patient/signup.html',context={'success':'done'})
+                except IntegrityError as e:
+                    if 'staff_email' in str(e):
+                        error = {
+                            'error':'email-error'
+                        }
+                    else:
+                        error = {
+                            'error':'else'
+                        }
+            else:
+                error = {
+                    'error':'password-mismatched'
+                }
+        else:
+            error = {
+                'error':'empty-fields'
+            }
+        return render(request,'Patient/signup.html',context=error)
+
+    return render(request,'Patient/signup.html')
+
+def staff_login(request):
+    return render(request,'Patient/login.html')

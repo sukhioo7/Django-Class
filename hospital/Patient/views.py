@@ -225,4 +225,39 @@ def staff_signup(request):
     return render(request,'Patient/signup.html')
 
 def staff_login(request):
+    if request.POST:
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if all([email,password]):
+            check_email = models.Staff.objects.filter(staff_email=email).exists()
+            if check_email:
+                staff = models.Staff.objects.get(staff_email=email)
+                check_pass = check_password(password,staff.staff_password)
+                if check_pass:
+                    request.session['staff_id'] = staff.staff_id
+                    request.session['staff_name'] = staff.staff_name
+                    request.session['staff_designation'] = staff.staff_designation
+                    return redirect('Home_page')
+                else:
+                    error = {
+                        'error':'not-matched'
+                    }
+            else:
+                error = {
+                    'error':'not-matched'
+                }
+        else:
+            error = {
+                'error':'empty-fields'
+            }
+        return render(request,'Patient/login.html',context=error)
+
+
     return render(request,'Patient/login.html')
+
+def logout(request):
+    request.session.pop('staff_id')
+    request.session.pop('staff_name')
+    request.session.pop('staff_designation')
+    return redirect('Patient:login')

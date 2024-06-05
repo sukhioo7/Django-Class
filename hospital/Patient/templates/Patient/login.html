@@ -11,8 +11,20 @@
 
     <div class="mr-5 ml-5 p-3">
         <h1 class="text-center text-dark m-3">Login</h1>
-    <form method="POST" action='' class="m-5 p-5">
+    <form method="POST" action="{% url 'Patient:login' %}" class="m-5 p-5">
         {% csrf_token %}
+        {% if error == 'empty-fields' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Empty Fields!</strong> Please fill all the fields.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+        {% if error == 'not-matched' %}
+        <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+            <strong>Invalid Details!</strong> Email or password is incorrect.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
         <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
             <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

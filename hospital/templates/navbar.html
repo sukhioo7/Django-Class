@@ -27,8 +27,15 @@
             <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-          <a class="btn btn-primary ms-2" href="{% url 'Patient:signup' %}">Signup</a>
-          <a class="btn btn-success ms-2" href="{% url 'Patient:login' %}">Login</a>
+          {% if request.session.staff_id %}
+            <div class="ms-2 bg-primary p-2 rounded">
+              <b class="text-white">{{request.session.staff_name}}</b>
+              <a class="btn btn-danger ms-2" href="{% url 'Patient:logout' %}">Logout</a>
+            </div>
+          {% else %}
+            <a class="btn btn-primary ms-2" href="{% url 'Patient:signup' %}">Signup</a>
+            <a class="btn btn-success ms-2" href="{% url 'Patient:login' %}">Login</a>
+          {% endif %}
       </div>
     </div>
   </nav>

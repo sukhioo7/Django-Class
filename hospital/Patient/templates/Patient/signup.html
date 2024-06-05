@@ -10,8 +10,8 @@
     {% include 'navbar.html' %}
 
     <div class="mr-5 ml-5 p-3">
-        <h1 class="text-center text-dark m-3">Sign Up</h1>
-    <form method="POST" action="{% url 'Patient:signup' %}" class="m-5 p-5">
+        <h1 class="text-center text-dark m-5">Sign Up</h1>
+    <form method="POST" action="{% url 'Patient:signup' %}" class="ms-5 me-5 ps-5 pe-5">
         {% csrf_token %}
         {% if error == 'else' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">

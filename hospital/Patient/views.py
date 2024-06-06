@@ -10,6 +10,8 @@ from django.contrib.auth.hashers import make_password,check_password
 
 # Create your views here.
 def patient(request,page):
+    if not(request.session.get('staff_id')):
+        return redirect('Patient:login')
     if request.GET:
         query = request.GET['search']
         patients = models.Patient.objects.filter(Q(patient_name__icontains=query) 
@@ -77,6 +79,8 @@ def patient(request,page):
     return render(request,'Patient/patient.html',context=data) 
 
 def filter_patient(request,by):
+    if not(request.session.get('staff_id')):
+        return redirect('Patient:login')
     if by=='male':
         patients = models.Patient.objects.filter(patient_gender="Male").all()
         data = {
@@ -101,6 +105,8 @@ def filter_patient(request,by):
     
 
 def convert2excel(request):
+    if not(request.session.get('staff_id')):
+        return redirect('Patient:login')
     patients = models.Patient.objects.all().values(
                         'patient_id','patient_name','patient_age','patient_phone',
                         'patient_email','patient_gender','patient_city','patient_symptoms',
@@ -118,6 +124,8 @@ def convert2excel(request):
     return redirect('Patient:download-excel')
 
 def download_excel(request):
+    if not(request.session.get('staff_id')):
+        return redirect('Patient:login')
     file_path = os.path.join(settings.MEDIA_ROOT, 'files\patients.xlsx')
     
     if os.path.exists(file_path):
@@ -129,6 +137,8 @@ def download_excel(request):
         return HttpResponse('File not found')
 
 def delete_patient(request,id):
+    if not(request.session.get('staff_id')):
+        return redirect('Patient:login')
     patient = models.Patient.objects.get(patient_id=id)
     patient.patient_image.delete()
     patient.delete()
@@ -136,6 +146,8 @@ def delete_patient(request,id):
 
 
 def update(request,id):
+    if not(request.session.get('staff_id')):
+        return redirect('Patient:login')
     if request.POST:
         full_name = request.POST['full_name']
         age = request.POST['age']

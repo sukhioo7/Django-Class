@@ -11,6 +11,21 @@
     <h1>About Page</h1>
     <h2>{{person_name}}</h2>
     <h3>His age is {{age}}</h3>
+    <h4>{{qualifications.university}}</h4>
+    {% if profession == 'Developer' %}
+        <ul>
+          {% for sub in subject %}
+            <li>{{sub}}</li>
+          {% endfor %}
+        </ul>
+    {% elif profession == 'Doctor' %}
+        <h4>He is a Doctor</h4>
+    {% else %}
+        <h4>I Don't know what he do.</h4>
+    {% endif %}
+    <h4>{{intro|lower}}</h4>
+    <h4>{{intro|upper}}</h4>
+    <h4>{{intro|title}}</h4>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

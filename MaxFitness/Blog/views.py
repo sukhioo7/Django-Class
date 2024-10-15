@@ -4,3 +4,6 @@ from django.shortcuts import render,HttpResponse
 
 def blog_home(request):
     return render(request, 'Blog/home.html')
+
+def add_blog(request):
+    return render(request, 'Blog/add_blog.html')

@@ -4,7 +4,7 @@ from . import models
 # Create your views here.
 
 def blog_home(request):
-    return render(request, 'Blog/home.html')
+    return render(request, 'Blog/blogs.html')
 
 def add_blog(request):
     if request.method == 'POST':
@@ -52,3 +52,4 @@ def add_blog(request):
 
 
     return render(request, 'Blog/add_blog.html')
+

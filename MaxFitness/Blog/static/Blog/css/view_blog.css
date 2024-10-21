@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+.blog-header{
+ color: white;
+ /* background-color: #FF8343; */
+
+ margin: 0.8em;
+ border-radius: 12px;
+ font-family: "Pacifico", cursive;
+ text-align: center;
+}
+.blog-header h1{
+    font-size: 55px;
+    background-color: rgba(0, 0, 0, 0.492);
+    width: 100%;
+    height: 100%;
+    padding: 2em 3em;
+    border-radius: 12px;
+}
+.blog-content h3{
+    color: #404054;
+    /* text-align: center; */
+    margin-left: 1em;
+    font-size: 2em;
+}
+.blog-content p{
+    color: #173B45;
+    padding: 1.3em;
+}
+.edit-btn a{
+    width: 48%;
+}

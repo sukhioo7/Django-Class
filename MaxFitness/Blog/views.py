@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from . import models
 import random
 
@@ -68,3 +68,8 @@ def view_blog(request,blog_id):
     }
     return render(request, 'Blog/view_blog.html',context=data)
 
+def delete_blog(request,blog_id):
+    '''Delete from blogs where blog_id = blog_id;'''
+    # blog = models.Blog.objects.get(blog_id=blog_id)
+    # blog.delete()
+    return redirect('Blog:blog_app')

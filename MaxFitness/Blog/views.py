@@ -60,5 +60,11 @@ def add_blog(request):
 
     return render(request, 'Blog/add_blog.html')
 
-def view_blog(request):
-    return render(request, 'Blog/view_blog.html')
+def view_blog(request,blog_id):
+    '''Select * from blogs where blog_id = blog_id;'''
+    blog = models.Blog.objects.get(blog_id=blog_id)
+    data = {
+        'blog': blog
+    }
+    return render(request, 'Blog/view_blog.html',context=data)
+

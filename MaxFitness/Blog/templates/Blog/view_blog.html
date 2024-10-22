@@ -12,6 +12,14 @@
             background-image: url("{% static 'Blog/img/blog1.jpg' %}");
             background-size: cover;
         }
+        .edit-delete{
+            display: flex;
+            justify-content: center;
+        }
+        .edit-delete a{
+            width: 40%;
+            margin: 10px;
+        }
     </style>
   </head>
   <body>
@@ -19,14 +27,23 @@
 
     <main>
         <div class="blog-header">
-            <H1>Hellsdfg</H1>
+            <H1>{{blog.title}}</H1>
         </div>
-
+        <div class="edit-delete">
+            <a href="" class="btn btn-danger">Delete</a>
+            <a href="" class="btn btn-success">Edit</a>
+        </div>
         <div class="blog-content mt-5 mb-5 container">
             <h3>Introduction</h3>
-            <p></p>
-            <h3></h3>
-            <p></p>
+            <p>{{blog.introduction}}</p>
+            <h3>{{blog.sub_heading1}}</h3>
+            <p>{{blog.content1}}</p>
+            <h3>{{blog.sub_heading2}}</h3>
+            <p>{{blog.content2}}</p>
+            <h3>{{blog.sub_heading3}}</h3>
+            <p>{{blog.content3}}</p>
+            <h3>{{blog.sub_heading4}}</h3>
+            <p>{{blog.content4}}</p>
         </div>
     </main>
     </body>

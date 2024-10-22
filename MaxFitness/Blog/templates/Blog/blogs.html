@@ -26,7 +26,7 @@
                             {{blog.post_date|date:"l, M d Y g:i A"}}
                         </small></p>
                 </div>
-                <a href="" class="btn btn-primary m-2">Read More</a>
+                <a href="{% url 'Blog:view_blog' blog_id=blog.blog_id %}" class="btn btn-primary m-2">Read More</a>
             </div>
             {% endfor %}
         </div>

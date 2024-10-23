@@ -16,60 +16,71 @@
     <main class="main-div">
         <div class="blog-list">
             {% for blog in blogs %}
-            <div class="card mb-3">
-                <img height="350vw" src="{% static 'Blog/img/blog1.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{blog.title}}</h5>
-                    <p class="card-text">{{ blog.introduction|slice:":300" }}...</p>
-                    <p><span class="p-1 bg-info rounded">{{blog.category}}</span></p>
-                    <p class="card-text"><small class="text-muted">
-                            {{blog.post_date|date:"l, M d Y g:i A"}}
-                        </small></p>
+            <div class="card">
+                <div class="thumbnail"><img class="left" src="{% static 'Blog/img/blog1.jpg' %}"/></div>
+                <div class="right">
+                  <h1><a href="{% url 'Blog:view_blog' blog_id=blog.blog_id %}">{{blog.title}}</a></h1>
+                  <span class="author">{{blog.category}}</span>
+                  <div class="separator"></div>
+                  <p>{{ blog.introduction|slice:":300" }}...</p>
                 </div>
-                <a href="{% url 'Blog:view_blog' blog_id=blog.blog_id %}" class="btn btn-primary m-2">Read More</a>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="filter-list">
-            <h2>Filters</h2>
-            <div class="filter-container">
+                <div>
+                  <h5>{{blog.post_date|date:"d"}}</h5>
+                  <h6>{{blog.post_date|date:"M Y"}}</h6>
+                </div>
+                <div class="fab"><img src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.1297763733.1729555200&semt=ais_hybrid" alt=""><span>Harry Potter</span></div>
+              </div>
+              {% endfor %}
+          </div>
+          <div class="filter-list">
+              <h1>Filters</h1>
+              <div class="filter-container">
                 <form class="mt-4">
-                    <div class="col-md-4 w-100 mb-2">
-                        <label for="inputState" class="form-label">Category</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Choose...</option>
-                            <option value="Weight Loss">Weight Loss</option>
-                            <option value="Weight Gain">Weight Gain</option>
-                            <option value="Food">Food</option>
-                            <option value="Food">Health</option>
-                            <option value="Food">Muscle Gain</option>
-                            <option value="Food">Yoga</option>
-                        </select>
+                  <div class="col-md-4 w-100 mb-2">
+                    <label for="inputState" class="form-label">Category</label>
+                    <select id="inputState" class="form-select">
+                      <option selected>Choose...</option>
+                      <option value="Weight Loss">Weight Loss</option>
+                        <option value="Weight Gain">Weight Gain</option>
+                        <option value="Food">Food</option>
+                        <option value="Food">Health</option>
+                        <option value="Food">Muscle Gain</option>
+                        <option value="Food">Yoga</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 w-100 mb-2">
+                    <label for="inputState" class="form-label">Select By Publisher</label>
+                    <select id="inputState" class="form-select">
+                      <option selected>Choose...</option>
+                      <option value="Weight Loss">Weight Loss</option>
+                        <option value="Weight Gain">Weight Gain</option>
+                        <option value="Food">Food</option>
+                        <option value="Food">Health</option>
+                        <option value="Food">Muscle Gain</option>
+                        <option value="Food">Yoga</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 w-100 mt-4 mb-3">
+                    <div class="row">
+                      <div class="col">
+                        <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked>
+                        <label class="btn" for="option5">Ascending</label>  
+                      </div>
+                      <div class="col">
+                        <input type="radio" class="btn-check" name="options-base" id="option6" autocomplete="off">
+                        <label class="btn" for="option6">Descending</label>
+                      </div>
                     </div>
-                    <div class="col-md-4 w-100 mt-4 mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <input type="radio" class="btn-check" name="options-base" id="option5"
-                                    autocomplete="off" checked>
-                                <label class="btn" for="option5">Ascending</label>
-                            </div>
-                            <div class="col">
-                                <input type="radio" class="btn-check" name="options-base" id="option6"
-                                    autocomplete="off">
-                                <label class="btn" for="option6">Descending</label>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Apply</button>
                 </form>
-
-            </div>
-        </div>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+                
+              </div>
+          </div>
+        </main>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+      </body>
+    </html>
+    
+    

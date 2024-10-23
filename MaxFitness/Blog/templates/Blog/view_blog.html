@@ -31,7 +31,7 @@
         </div>
         <div class="edit-delete">
             <a href="{% url 'Blog:delete_blog' blog_id=blog.blog_id %}" class="btn btn-danger">Delete</a>
-            <a href="" class="btn btn-success">Edit</a>
+            <a href="{% url 'Blog:update_blog' blog_id=blog.blog_id %}" class="btn btn-success">Edit</a>
         </div>
         <div class="blog-content mt-5 mb-5 container">
             <h3>Introduction</h3>

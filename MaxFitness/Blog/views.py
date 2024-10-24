@@ -33,19 +33,6 @@ def add_blog(request):
 
         if all([title,category,introduction,sub_heading1,sub_heading2,sub_heading3,sub_heading4,
                 content1,content2,content3,content4]):
-            # new_blog = models.Blog()
-            # new_blog.title = title
-            # new_blog.category = category
-            # new_blog.introduction = introduction
-            # new_blog.sub_heading1 = sub_heading1
-            # new_blog.sub_heading2 = sub_heading2
-            # new_blog.sub_heading3 = sub_heading3
-            # new_blog.sub_heading4 = sub_heading4
-            # new_blog.content1 = content1
-            # new_blog.content2 = content2
-            # new_blog.content3 = content3
-            # new_blog.content4 = content4
-            # new_blog.save()
 
             models.Blog.objects.create(title=title,category=category,introduction=introduction,
                                        sub_heading1=sub_heading1,sub_heading2=sub_heading2,sub_heading3=sub_heading3,

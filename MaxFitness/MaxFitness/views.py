@@ -3,7 +3,7 @@ from Blog.models import Blog
 
 
 def home(request):
-    blogs = Blog.objects.all().order_by('post_date')
+    blogs = Blog.objects.all().order_by('-post_date')[:3]
     data = {
         'blogs': blogs
     }

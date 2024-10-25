@@ -103,3 +103,9 @@ def update_blog(request,blog_id):
             data['error'] = 'All Fields Are Required.'
 
     return render(request,'Blog/update.html',context=data)
+
+def login_user(request):
+    return render(request,'Blog/login.html')
+
+def signup_user(request):
+    return render(request,'Blog/signup.html')

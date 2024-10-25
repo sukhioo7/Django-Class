@@ -2,6 +2,21 @@ from django.db import models
 
 # Create your models here.
 
+
+class Bloggers(models.Model):
+    blogger_id = models.AutoField(primary_key=True, unique=True)
+    first_name = models.CharField(max_length=300)
+    last_name = models.CharField(max_length=300)
+    email = models.EmailField(unique=True)
+    country = models.CharField(max_length=300)
+    city = models.CharField(max_length=300)
+    profile_picture = models.ImageField(upload_to='bloggers_profiles/', null=True, blank=True)
+    password = models.CharField(max_length=3000)
+
+    def __str__(self):
+        return f'Blogger ID: {self.blogger_id}, First Name: {self.first_name}, Last Name: {self.last_name}'
+
+
 class Blog(models.Model):
 
     CATEGORY_CHOICES = [
@@ -26,6 +41,8 @@ class Blog(models.Model):
     sub_heading4 = models.CharField(max_length=1000)
     content4 = models.TextField(max_length=10000)
     post_date = models.DateTimeField(auto_now=True)
+    published_by = models.ForeignKey(Bloggers,on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return f'Blog ID: {self.blog_id}, category: {self.category}'
+

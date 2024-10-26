@@ -108,4 +108,44 @@ def login_user(request):
     return render(request,'Blog/login.html')
 
 def signup_user(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        country = request.POST.get('country')
+        city = request.POST.get('city')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm-password')
+
+        msg = {}
+
+        
+        if all([first_name, last_name, email, country, city, password, confirm_password]):
+            if password == confirm_password:
+                try : 
+                    profile_photo = request.FILES.get('profile_photo')
+
+                    new_blogger = models.Bloggers()
+                    new_blogger.first_name = first_name
+                    new_blogger.last_name = last_name
+                    new_blogger.email = email
+                    new_blogger.country = country
+                    new_blogger.city = city
+                    new_blogger.password = password
+
+                    if profile_photo:
+                        new_blogger.profile_picture = profile_photo
+                    
+                    new_blogger.save()
+                    msg['success'] = 'User Created Successfully.'
+
+                except IntegrityError as e:
+                    msg['error'] = str(e)
+            else:
+                msg['error'] = 'Passwords Do Not Matched'
+        else:
+            msg['error'] = 'All Fields Are Required'
+
+        return render(request,'Blog/signup.html',context=msg)
+    
     return render(request,'Blog/signup.html')

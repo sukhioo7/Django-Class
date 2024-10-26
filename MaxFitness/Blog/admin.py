@@ -9,4 +9,5 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(models.Bloggers)
 class BloggerAdmin(admin.ModelAdmin):
-    list_display = ('blogger_id', 'first_name', 'last_name', 'email')
+    list_display = ('email','first_name', 'last_name')
+    

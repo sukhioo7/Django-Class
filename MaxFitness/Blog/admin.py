@@ -7,7 +7,7 @@ from . import models
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'post_date')
 
-@admin.register(models.Bloggers)
+@admin.register(models.Blogger)
 class BloggerAdmin(admin.ModelAdmin):
     list_display = ('email','first_name', 'last_name')
     

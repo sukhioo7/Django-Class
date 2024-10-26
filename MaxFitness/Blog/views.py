@@ -1,13 +1,21 @@
 from django.shortcuts import render,HttpResponse,redirect
 from . import models
 from django.db import IntegrityError
+from django.db.models import Q
 import random
+from django.contrib.auth.hashers import make_password,check_password
 
 # Create your views here.
 
 def blog_home(request):
-    '''Select * from blogs;'''
-    blogs = models.Blog.objects.all()
+    if request.GET:
+        user_query = request.GET.get('user_query')
+        blogs = models.Blog.objects.filter(Q(title__icontains=user_query) | Q(introduction__icontains=user_query)
+                                      | Q(sub_heading1__icontains=user_query) | Q(sub_heading2__icontains=user_query)
+                                      | Q(sub_heading3__icontains=user_query) | Q(sub_heading4__icontains=user_query)).all()
+    else:       
+        '''Select * from blogs;'''
+        blogs = models.Blog.objects.all()
     data = {
         'blogs': blogs,
         'random_number': random.randint(1,6)
@@ -125,13 +133,15 @@ def signup_user(request):
                 try : 
                     profile_photo = request.FILES.get('profile_photo')
 
-                    new_blogger = models.Bloggers()
+                    encrypted_password = make_password(password)
+
+                    new_blogger = models.Blogger()
                     new_blogger.first_name = first_name
                     new_blogger.last_name = last_name
                     new_blogger.email = email
                     new_blogger.country = country
                     new_blogger.city = city
-                    new_blogger.password = password
+                    new_blogger.password = encrypted_password
 
                     if profile_photo:
                         new_blogger.profile_picture = profile_photo

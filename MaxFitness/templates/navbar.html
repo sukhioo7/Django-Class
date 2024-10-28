@@ -1,33 +1,60 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">MaxFitness</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'home_page' %}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'Blog:blog_app' %}">Blogs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">About-Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Contact-Us</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'home_page' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'Blog:blog_app' %}">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">About-Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Contact-Us</a>
+                </li>
+            </ul>
+            <form class="d-flex" method="GET" action="{% url 'Blog:blog_app' %}" role="search">
+                <input name="user_query" class="form-control me-2" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <div class="profile-pic">
+                        <img src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.1297763733.1729555200&semt=ais_hybrid" alt="Profile Picture">
+                    </div>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'Blog:add_new_blog' %}"><i class="fas fa-cog fa-fw"></i> Add New Blog</a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="user_profile.php"><i class="fas fa-sliders-h fa-fw"></i>
+                            Account</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a>
+                    </li>
+                </ul>
             </li>
         </ul>
-        <form class="d-flex" method="GET" action="{% url 'Blog:blog_app' %}" role="search">
-            <input name="user_query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <a class="btn btn-outline-dark ms-2" href="{% url 'Blog:add_new_blog' %}">Add New Blog</a>
-        <div>
-            <a class="btn btn-outline-primary ms-2" href="{% url 'Blog:login_user' %}">Login</a>
-            <a class="btn btn-primary ms-2" href="{% url 'Blog:signup_user' %}">Signup</a>
-        </div>
-        </div>
+
+        <a href="{% url 'Blog:login_user' %}" class="btn btn-outline-primary ms-2">Login</a>
+        <a href="{% url 'Blog:signup_user' %}" class="btn btn-primary ms-2">Signup</a>
+
     </div>
-    </nav>
+    </div>
+</nav>

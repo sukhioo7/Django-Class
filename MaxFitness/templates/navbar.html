@@ -26,6 +26,7 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
+        {% if request.session.blogger_id %}
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -46,15 +47,15 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a>
+                    <li><a class="dropdown-item" href="{% url 'Blog:logout_user' %}"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a>
                     </li>
                 </ul>
             </li>
         </ul>
-
+        {% else %}
         <a href="{% url 'Blog:login_user' %}" class="btn btn-outline-primary ms-2">Login</a>
         <a href="{% url 'Blog:signup_user' %}" class="btn btn-primary ms-2">Signup</a>
-
+        {% endif %}
     </div>
     </div>
 </nav>

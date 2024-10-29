@@ -29,7 +29,7 @@
                   <h5>{{blog.post_date|date:"d"}}</h5>
                   <h6>{{blog.post_date|date:"M Y"}}</h6>
                 </div>
-                <div class="fab"><img src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.1297763733.1729555200&semt=ais_hybrid" alt=""><span>Harry Potter</span></div>
+                <div class="fab"><img src="{{blog.published_by.profile_picture.url}}" alt=""><span>{{blog.published_by.first_name}} {{blog.published_by.last_name}}</span></div>
               </div>
               {% endfor %}
           </div>

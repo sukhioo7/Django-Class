@@ -15,7 +15,7 @@ def blog_home(request):
                                       | Q(sub_heading3__icontains=user_query) | Q(sub_heading4__icontains=user_query)).all()
     else:       
         '''Select * from blogs;'''
-        blogs = models.Blog.objects.all()
+        blogs = models.Blog.objects.select_related('published_by').all()
     data = {
         'blogs': blogs,
         'random_number': random.randint(1,6)

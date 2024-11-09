@@ -41,7 +41,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="user_profile.php"><i class="fas fa-sliders-h fa-fw"></i>
+                    <li><a class="dropdown-item" href="{% url 'Blog:dashboard' %}"><i class="fas fa-sliders-h fa-fw"></i>
                             Account</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
                     <li>
@@ -53,8 +53,8 @@
             </li>
         </ul>
         {% else %}
-        <a href="{% url 'Blog:login_user' %}" class="btn btn-outline-primary ms-2">Login</a>
-        <a href="{% url 'Blog:signup_user' %}" class="btn btn-primary ms-2">Signup</a>
+            <a href="{% url 'Blog:login_user' %}" class="btn btn-outline-primary ms-2">Login</a>
+            <a href="{% url 'Blog:signup_user' %}" class="btn btn-primary ms-2">Signup</a>
         {% endif %}
     </div>
     </div>

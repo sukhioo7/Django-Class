@@ -21,9 +21,9 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="<?php echo $user['profile_image']; ?>" alt="Admin" class="rounded-circle" width="150">
+                    <img src="{{blogger.profile_picture.url}}" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>Harry Porter</h4>
+                      <h4>{{blogger.first_name}} {{blogger.last_name}}</h4>
                       <p class="text-secondary mb-1">Full Stack Developer</p>
                       <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                     </div>
@@ -43,7 +43,7 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                     Harry Potter
+                      {{blogger.first_name}} {{blogger.last_name}}
                     </div>
                   </div>
                   <hr>
@@ -52,7 +52,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    harry@gmail.com
+                    {{blogger.email}}
                     </div>
                   </div>
                   <hr>
@@ -61,7 +61,7 @@
                       <h6 class="mb-0">Country</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      India
+                      {{blogger.country}}
                     </div>
                   </div>
                   <hr>
@@ -70,7 +70,7 @@
                       <h6 class="mb-0">City</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Ropar
+                      {{blogger.city}}
                     </div>
                   </div>
                   <hr>
@@ -79,7 +79,7 @@
                       <h6 class="mb-0">Number Blogs</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      12
+                      {{number_of_blogs}}
                     </div>
                   </div>
                 </div>
@@ -88,16 +88,18 @@
                 <h2>Your Blogs</h2>
               </div>
               <div class="row p-2 gutters-sm">
+                    {% for blog in blogger_blogs %}
                         <div class="card mb-3">
-                          <img height="350vw" src="<?php echo $imgage_path ?>" 
+                          <img height="350vw" src="{% static 'Blog/img/blog1.jpg' %}" 
                           class="card-img-top" alt="...">
                           <div class="card-body">
-                            <h5 class="card-title"><?php echo $blog['blog_title'] ?></h5>
-                            <p class="card-text"><?php echo substr($blog['introduction'],0,180) ?>...</p>
-                            <p class="card-text"><small class="text-muted"><?php echo date('l, j M Y',$real_time); ?></small></p>
+                            <h5 class="card-title">{{blog.title}}</h5>
+                            <p class="card-text">{{ blog.introduction|slice:":300" }}...</p>
+                            <p class="card-text"><small class="text-muted">{{blog.post_date|date:"d M Y"}}</small></p>
                           </div>
-                          <a href="blog_view.php?blog_id=<?php echo $blog['blog_id'] ?>" class="btn btn-primary m-2">Read More</a>
+                          <a href="{% url 'Blog:view_blog' blog_id=blog.blog_id %}" class="btn btn-primary m-2">Read More</a>
                         </div>
+                    {% endfor %}
               </div>
 
 
